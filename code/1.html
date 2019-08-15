@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>基于Weaver Component二次封装组件的使用说明</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.0435eef5.css" as="style"><link rel="preload" href="/assets/js/app.96828a14.js" as="script"><link rel="preload" href="/assets/js/2.cf025fe3.js" as="script"><link rel="preload" href="/assets/js/7.45481f25.js" as="script"><link rel="prefetch" href="/assets/js/10.dffb93f3.js"><link rel="prefetch" href="/assets/js/3.69da2c98.js"><link rel="prefetch" href="/assets/js/4.ee1e870c.js"><link rel="prefetch" href="/assets/js/5.e27bd8f3.js"><link rel="prefetch" href="/assets/js/6.0cd49316.js"><link rel="prefetch" href="/assets/js/8.5b84817c.js"><link rel="prefetch" href="/assets/js/9.64895123.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0435eef5.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/summary/1.html" class="nav-link">工作总结</a></div><div class="nav-item"><a href="/code/1.html" class="nav-link router-link-exact-active router-link-active">工作代码说明</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/summary/1.html" class="nav-link">工作总结</a></div><div class="nav-item"><a href="/code/1.html" class="nav-link router-link-exact-active router-link-active">工作代码说明</a></div> <!----></nav>  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="基于weaver-component二次封装组件的使用说明"><a href="#基于weaver-component二次封装组件的使用说明" aria-hidden="true" class="header-anchor">#</a> 基于Weaver Component二次封装组件的使用说明</h1> <h2 id="authority组件"><a href="#authority组件" aria-hidden="true" class="header-anchor">#</a> Authority组件</h2> <ol><li>实例化AuthorityStore</li></ol> <div class="language-javascript extra-class"><pre class="language-javascript"><code>@observable authorityStore <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AuthorityStore</span><span class="token punctuation">(</span>api<span class="token punctuation">.</span>getHasRight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><ol start="2"><li>引入Authority组件，并传入authorityStore</li></ol> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>
+	Authority<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../public/valhalla/components/index.js'</span><span class="token punctuation">;</span>
+
+<span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">const</span> <span class="token punctuation">{</span>
+		store
+	<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+		authorityStore<span class="token punctuation">,</span>
+	<span class="token punctuation">}</span> <span class="token operator">=</span> store<span class="token punctuation">;</span>
+
+	<span class="token keyword">return</span> <span class="token punctuation">(</span>
+		<span class="token operator">&lt;</span>Authority store<span class="token operator">=</span><span class="token punctuation">{</span>authorityStore<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+			<span class="token operator">...</span>
+		<span class="token operator">&lt;</span><span class="token operator">/</span>Authority<span class="token operator">&gt;</span>
+	<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="top组件"><a href="#top组件" aria-hidden="true" class="header-anchor">#</a> Top组件</h2> <ol><li>实例化TopStore</li></ol> <div class="language-javascript extra-class"><pre class="language-javascript"><code>@observable topStore <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TopStore</span><span class="token punctuation">(</span>api<span class="token punctuation">.</span>getRightMenu<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><ol start="2"><li>定义组件的loading属性</li></ol> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">//一般获取tableStore的loading属性作为页面的加载状态</span>
+<span class="token keyword">get</span> <span class="token function">topLoading</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">const</span> <span class="token punctuation">{</span>
+		loading
+	<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>tableListStore<span class="token punctuation">.</span>tableStore<span class="token punctuation">;</span>
+
+	<span class="token keyword">return</span> loading<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="3"><li>定义页面上按钮、菜单的状态</li></ol> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">//数组中的loading一一对应页面上按钮、菜单的状态</span>
+<span class="token keyword">get</span> <span class="token function">rightMenuStates</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">const</span> <span class="token punctuation">{</span>
+		loading<span class="token punctuation">,</span>
+	<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>tableListStore<span class="token punctuation">.</span>tableStore<span class="token punctuation">;</span>
+
+	<span class="token keyword">return</span> <span class="token punctuation">[</span>loading<span class="token punctuation">,</span> loading<span class="token punctuation">,</span> loading<span class="token punctuation">,</span> loading<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="4"><li>其他配置</li></ol> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">//设置页面标题</span>
+<span class="token keyword">get</span> <span class="token function">topConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> <span class="token punctuation">{</span>
+		title<span class="token punctuation">:</span> <span class="token function">getLabel</span><span class="token punctuation">(</span><span class="token string">'505619'</span><span class="token punctuation">,</span> <span class="token string">&quot;假期余额设置&quot;</span><span class="token punctuation">)</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="5"><li>假如页面上需要【有无账号】的图标开关按钮</li></ol> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>
+	AccountIcon
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../public/valhalla/components/index.js'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">get</span> <span class="token function">otherTopButtons</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token operator">&lt;</span>AccountIcon isShow<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>isNoAccountShow<span class="token punctuation">}</span> onClick<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>handleAccountIconClick<span class="token punctuation">}</span><span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="6"><li>引入Top组件，并传入topStore</li></ol> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>
+	Top<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../public/valhalla/components/index.js'</span><span class="token punctuation">;</span>
+
+<span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">const</span> <span class="token punctuation">{</span>
+		store
+	<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+		topStore<span class="token punctuation">,</span>
+	<span class="token punctuation">}</span> <span class="token operator">=</span> store<span class="token punctuation">;</span>
+
+	<span class="token keyword">return</span> <span class="token punctuation">(</span>
+		<span class="token operator">&lt;</span>Top store<span class="token operator">=</span><span class="token punctuation">{</span>topStore<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+			<span class="token operator">...</span>
+		<span class="token operator">&lt;</span><span class="token operator">/</span>Top<span class="token operator">&gt;</span>
+	<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.96828a14.js" defer></script><script src="/assets/js/2.cf025fe3.js" defer></script><script src="/assets/js/7.45481f25.js" defer></script>
+  </body>
+</html>

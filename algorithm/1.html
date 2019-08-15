@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>常用算法</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.0435eef5.css" as="style"><link rel="preload" href="/assets/js/app.96828a14.js" as="script"><link rel="preload" href="/assets/js/2.cf025fe3.js" as="script"><link rel="preload" href="/assets/js/6.0cd49316.js" as="script"><link rel="prefetch" href="/assets/js/10.dffb93f3.js"><link rel="prefetch" href="/assets/js/3.69da2c98.js"><link rel="prefetch" href="/assets/js/4.ee1e870c.js"><link rel="prefetch" href="/assets/js/5.e27bd8f3.js"><link rel="prefetch" href="/assets/js/7.45481f25.js"><link rel="prefetch" href="/assets/js/8.5b84817c.js"><link rel="prefetch" href="/assets/js/9.64895123.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0435eef5.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/summary/1.html" class="nav-link">工作总结</a></div><div class="nav-item"><a href="/code/1.html" class="nav-link">工作代码说明</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/summary/1.html" class="nav-link">工作总结</a></div><div class="nav-item"><a href="/code/1.html" class="nav-link">工作代码说明</a></div> <!----></nav>  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="常用算法"><a href="#常用算法" aria-hidden="true" class="header-anchor">#</a> 常用算法</h1> <h2 id="从一个数组中收集特定的数据"><a href="#从一个数组中收集特定的数据" aria-hidden="true" class="header-anchor">#</a> 从一个数组中收集特定的数据</h2> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">/**
+ * 每隔两项收集、组装一次数据
+ * ['09:00', '10:00', '11:00', '12:00'] =&gt;
+ * [{value:['09:00', '10:00']},{value:['12:00', '13:00']}]
+ */</span>
+<span class="token keyword">const</span> source <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'09:00'</span><span class="token punctuation">,</span> <span class="token string">'10:00'</span><span class="token punctuation">,</span> <span class="token string">'11:00'</span><span class="token punctuation">,</span> <span class="token string">'12:00'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> collecter <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+	temp <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+source<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> index</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+	temp<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>index <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		collecter<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+			value<span class="token punctuation">:</span> temp
+		<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		temp <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">/**
+ * 修改source，添加属性type
+ * 要求：每隔两项收集一次数据，type为start所在对象内的time放置在前面，type为end放置在后面。
+ * source =&gt; [{value:['09:00','10:00']},{value:['11:00','12:00']}]
+ */</span>
+<span class="token keyword">const</span> source <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+	type<span class="token punctuation">:</span> <span class="token string">'start'</span><span class="token punctuation">,</span>
+	time<span class="token punctuation">:</span> <span class="token string">'09:00'</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+	type<span class="token punctuation">:</span> <span class="token string">'end'</span><span class="token punctuation">,</span>
+	time<span class="token punctuation">:</span> <span class="token string">'10:00'</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+	type<span class="token punctuation">:</span> <span class="token string">'end'</span><span class="token punctuation">,</span>
+	time<span class="token punctuation">:</span> <span class="token string">'12:00'</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+	type<span class="token punctuation">:</span> <span class="token string">'start'</span><span class="token punctuation">,</span>
+	time<span class="token punctuation">:</span> <span class="token string">'11:00'</span>
+<span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> collecter <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+	temp <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//临时容器，用于存储时刻</span>
+
+<span class="token comment">/**
+ * 现在,temp并不是按照顺序存放数据，而是根据type来存放，
+ * type为start时，对应的time存放在第一位，type为end存放在第二位。
+ */</span>
+source<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span>index</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+	<span class="token keyword">const</span> <span class="token punctuation">{</span>
+		type<span class="token punctuation">,</span>
+		time
+	<span class="token punctuation">}</span> <span class="token operator">=</span> data<span class="token punctuation">;</span>
+
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">===</span> <span class="token string">'start'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		temp<span class="token punctuation">.</span><span class="token function">unshift</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+		temp<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token comment">//每隔两项，往collecter容器中push一次数据</span>
+	<span class="token comment">//假设每隔3项push一次，代码应调整为：index % 3 === 2</span>
+	<span class="token comment">//假设每隔4项push一次，代码应调整为：index % 4 === 3</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>index <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		collecter<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+			value<span class="token punctuation">:</span> temp
+		<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		temp <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//清空临时容器</span>
+	<span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.96828a14.js" defer></script><script src="/assets/js/2.cf025fe3.js" defer></script><script src="/assets/js/6.0cd49316.js" defer></script>
+  </body>
+</html>
